@@ -1,0 +1,16 @@
+{
+  "ConexionBD": {
+    "User": "sa",
+    "Pass": "Desarrollo$34",
+    "DataBase": "db_prototipo",
+    "Host": ".\\SQLEXPRESS"
+  },
+  "Log": {
+    "LogPathErr": "C:/TMP/ProtoTipoLog/Err/",
+    "LogPathTrazas": "C:/TMP/ProtoTipoLog/InOut/",
+    "LogErr": "ProtoTipoLogErr",
+    "LogTrazas": "ProtoTipoLogInOut",
+    "LogAlt": "ProtoTipoLogAlt",
+    "LogPathAlt": "C:/TMP/ProtoTipoLog/Alt/"
+  }
+}
