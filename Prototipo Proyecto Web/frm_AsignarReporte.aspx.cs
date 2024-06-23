@@ -1,4 +1,5 @@
-﻿using Prototipo_Proyecto_Web.App_Code;
+﻿using Newtonsoft.Json;
+using Prototipo_Proyecto_Web.App_Code;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,7 @@ namespace Prototipo_Proyecto_Web
     public partial class frm_AsignarReporte : System.Web.UI.Page
     {
         private clsConsultas clsCon;
-        private Regex regDescripRPT = new Regex(@"^[a-zA-Z\s0-9]*$");
+        private Regex regDescripRPT = new Regex(@"^[a-zA-Z\s0-9íÍáÁéÉóÓúÚü\(\)]*$");
         private Regex regCorreo = new Regex(@"^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$");
         private Regex regAnticipa = new Regex("^[0-9]*$");
         private Regex regSancion = new Regex(@"^[0-9]+([.][0-9]{2})?$");
@@ -98,6 +99,8 @@ namespace Prototipo_Proyecto_Web
             dvAlerta.Visible = false;
             lst_errores.Visible = false;
             bool continua = true;
+            clsCon = new clsConsultas();
+
             try
             {
                 #region validaciones descripción
@@ -206,6 +209,36 @@ namespace Prototipo_Proyecto_Web
                     dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Errores de validación", "Existen errores en los campos que debe validar, por favor verifique la sección de errores.");
 
                     return;
+                }
+
+                string json = JsonConvert.SerializeObject(new
+                {
+                    id_conf = 0,
+                    usuario = dropUsuario.SelectedValue,
+                    area_responsable = dropAreasR.SelectedValue,
+                    area_solicitante = dropAreasSol.SelectedValue,
+                    correo = txtCorreo.Text,
+                    descripcion = txtDescReport.Text.ToUpper(),
+                    periodicidad = dropPeriodo.SelectedValue,
+                    anticipacion = txtAnticipacion.Text,
+                    sancion = txtSancion.Text,
+                    estado = 1,
+                    usuariomodifica = string.Empty,
+                    tipotransaccion = 1
+                });
+
+                int res = clsCon.InsUpConfRPT(json);
+
+                if(res == 0)
+                {
+                    dvAlerta.Visible = true;
+                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Satisfactorio, "Exitoso", "Registro guardado correctamente.");
+                    Cargar_ConfRpt();
+                }
+                else
+                {
+                    dvAlerta.Visible = true;
+                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Error", "Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.");
                 }
             }
             catch(Exception ex)

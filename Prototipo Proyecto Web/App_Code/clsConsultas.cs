@@ -114,14 +114,14 @@ namespace Prototipo_Proyecto_Web.App_Code
 
                     cmd.ExecuteNonQuery();
 
-                    res = Convert.ToInt32(cmd.Parameters["@ID_CNF"].Value.ToString());
+                    res = 0;
                 }
 
                 clsLog.EscribeLogInOut("Finalicé correctamente la insercíón o actualización la información en la configuración de reportes", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
             }
             catch(Exception ex)
             {
-                res = 0;
+                res = -1;
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
                 clsLog.EscribeLogInOut("No se inserto o actualizo la información en la configuración de reportes", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
             }
