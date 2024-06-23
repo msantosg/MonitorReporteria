@@ -59,6 +59,7 @@ namespace Prototipo_Proyecto_Web
         protected void btnNConfig_Click(object sender, EventArgs e)
         {
             dvNConfig.Visible = true;
+            Session["InsOUpd"] = 1;
         }
 
         protected void gvConfigMonitor_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -67,12 +68,12 @@ namespace Prototipo_Proyecto_Web
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    if (e.Row.Cells[8].Text.Equals("PENDIENTE"))
-                        e.Row.Cells[8].ForeColor = System.Drawing.Color.Orange;
-                    else if (e.Row.Cells[8].Text.Equals("FINALIZADO"))
-                        e.Row.Cells[8].ForeColor = System.Drawing.Color.DarkGreen;
+                    if (e.Row.Cells[9].Text.Equals("PENDIENTE"))
+                        e.Row.Cells[9].ForeColor = System.Drawing.Color.Orange;
+                    else if (e.Row.Cells[9].Text.Equals("FINALIZADO"))
+                        e.Row.Cells[9].ForeColor = System.Drawing.Color.DarkGreen;
                     else
-                        e.Row.Cells[8].ForeColor = System.Drawing.Color.Red;
+                        e.Row.Cells[9].ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch(Exception ex)
@@ -213,7 +214,7 @@ namespace Prototipo_Proyecto_Web
 
                 string json = JsonConvert.SerializeObject(new
                 {
-                    id_conf = 0,
+                    id_conf = (Session["InsOUpd"].ToString().Equals("1") ? 0 : Convert.ToInt32(txtIdConf.Text)),
                     usuario = dropUsuario.SelectedValue,
                     area_responsable = dropAreasR.SelectedValue,
                     area_solicitante = dropAreasSol.SelectedValue,
@@ -222,9 +223,9 @@ namespace Prototipo_Proyecto_Web
                     periodicidad = dropPeriodo.SelectedValue,
                     anticipacion = txtAnticipacion.Text,
                     sancion = txtSancion.Text,
-                    estado = 1,
+                    estado = 0,
                     usuariomodifica = string.Empty,
-                    tipotransaccion = 1
+                    tipotransaccion = (Session["InsOUpd"].ToString().Equals("1") ? 1 : 2)
                 });
 
                 int res = clsCon.InsUpConfRPT(json);
@@ -232,19 +233,49 @@ namespace Prototipo_Proyecto_Web
                 if(res == 0)
                 {
                     dvAlerta.Visible = true;
-                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Satisfactorio, "Exitoso", "Registro guardado correctamente.");
-                    Cargar_ConfRpt();
+                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Satisfactorio, "Exitoso", "Registro guardado correctamente.");                    
                 }
                 else
                 {
                     dvAlerta.Visible = true;
                     dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Error", "Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.");
                 }
+
+                Cargar_ConfRpt();
+                dvNConfig.Visible = false;
             }
             catch(Exception ex)
             {
                 dvAlerta.Visible = true;
                 dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Error General", "Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.");
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
+
+        protected void gvConfigMonitor_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if(e.CommandName == "Select")
+                {
+                    Session["InsOUpd"] = 2;
+                    dvNConfig.Visible = true;
+                    dvAlerta.Visible = false;
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow row = gvConfigMonitor.Rows[index];
+                    txtIdConf.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ID_CONFIGURACION"].ToString();
+                    dropAreasR.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_RESPONSABLE"].ToString();
+                    dropAreasSol.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_SOLICITANTE"].ToString();
+                    txtDescReport.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["DESCRIPCION"].ToString();
+                    txtCorreo.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["CORREO"].ToString();
+                    dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
+                    dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
+                    txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
+                    txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
             }
         }

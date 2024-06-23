@@ -26,6 +26,7 @@
             </div>
             <br />
             <div class="border border-primary" runat="server" id="dvNConfig" visible="false">
+                <asp:TextBox runat="server" ID="txtIdConf" Visible="false"></asp:TextBox>
                 <br />
                 <div class="row">
                     <div class="col-sm-6">                        
@@ -136,8 +137,9 @@
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvConfigMonitor" AutoGenerateColumns="false" AllowPaging="True" ClientIDMode="Static"
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
+                                    DataKeyNames="ID_CONFIGURACION, USUARIO, AREA_RESPONSABLE, AREA_SOLICITANTE, CORREO, DESCRIPCION, PERIODICIDAD, ANTICIPACION, SANCION, ESTADO, FECHA_REGISTRO, USUARIO_MODIFICACION, FECHA_MODIFICACION"
                                     GridLines="Horizontal" CssClass="table table-sm text-nowrap mt-5" Width="1020px"
-                                    Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvConfigMonitor_RowDataBound">
+                                    Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvConfigMonitor_RowDataBound" OnRowCommand="gvConfigMonitor_RowCommand">
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="ID_CONFIGURACION" />
                                         <asp:BoundField HeaderText="USUARIO" DataField="USUARIO" />
@@ -147,10 +149,16 @@
                                         <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="DESCRIPCION" />
                                         <asp:BoundField HeaderText="PERIODICIDAD" DataField="PERIODICIDAD" />
                                         <asp:BoundField HeaderText="ANTICIPACIÓN" DataField="ANTICIPACION" />
+                                        <asp:BoundField HeaderText="SANCIÓN" DataField="SANCION"/>
                                         <asp:BoundField HeaderText="ESTADO" DataField="ESTADO" />
                                         <asp:BoundField HeaderText="FECHA REGISTRO" DataField="FECHA_REGISTRO" />
                                         <asp:BoundField HeaderText="USUARIO MODIFICA" DataField="USUARIO_MODIFICACION" />
                                         <asp:BoundField HeaderText="FECHA MODIFICACIÓN" DataField="FECHA_MODIFICACION" />
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="btnEditarCNF" CssClass="btn btn-sm btn-success" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"><i class="fa-solid fa-edit"></i> Editar Registro</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                                     <HeaderStyle BackColor="DarkBlue" Font-Bold="True" ForeColor="White" />
