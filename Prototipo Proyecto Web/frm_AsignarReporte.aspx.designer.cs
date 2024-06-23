@@ -114,6 +114,15 @@ namespace Prototipo_Proyecto_Web
         protected global::System.Web.UI.WebControls.TextBox txtAnticipacion;
 
         /// <summary>
+        /// Control txtSancion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSancion;
+
+        /// <summary>
         /// Control btnCancelar.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,24 @@ namespace Prototipo_Proyecto_Web
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnGuardar;
+
+        /// <summary>
+        /// Control lst_errores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lst_errores;
+
+        /// <summary>
+        /// Control errores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errores;
 
         /// <summary>
         /// Control gvConfigMonitor.

@@ -26,18 +26,19 @@
             </div>
             <br />
             <div class="border border-primary" runat="server" id="dvNConfig" visible="false">
-                <br />   
+                <br />
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6">                        
+                            
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon1">Descripción Reporte</span>
-                            <asp:TextBox runat="server" ID="txtDescReport" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="basicaddon1"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtDescReport" CssClass="form-control" style="text-transform:uppercase;" aria-label="Descripción Reporte" aria-describedby="basicaddon1"></asp:TextBox>
                         </div>
                     </div>
                     <div class="col-sm-6"> 
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon2">Área Responsable</span>
-                            <asp:DropDownList runat="server" ID="dropAreasR" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="bassicaddon2">
+                            <asp:DropDownList runat="server" ID="dropAreasR" CssClass="form-control" aria-label="Área Responsable" aria-describedby="bassicaddon2">
                                 <asp:ListItem Value="---">Seleccione Área</asp:ListItem>
                                 <asp:ListItem Value="1">Área Número 1</asp:ListItem>
                             </asp:DropDownList>
@@ -49,7 +50,7 @@
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon3">Área Solicitante</span>
-                            <asp:DropDownList runat="server" ID="dropAreasSol" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="bassicaddon3">
+                            <asp:DropDownList runat="server" ID="dropAreasSol" CssClass="form-control" aria-label="Área Solicitante" aria-describedby="bassicaddon3">
                                 <asp:ListItem Value="---">Seleccione Área</asp:ListItem>
                                 <asp:ListItem Value="1">Área Número 1</asp:ListItem>
                             </asp:DropDownList>
@@ -58,7 +59,7 @@
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon5">Correo electrónico</span>
-                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="basicaddon4"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control" aria-label="Correo Electrónico" aria-describedby="basicaddon4"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
                     </div>                   
                 </div>
                 <br />
-                <div class="row">
+                <div class="row">                    
                      <div class="col-sm-6">
                          <div class="input-group input-group-sm">
                              <span class="input-group-text" id="basicaddon7">Anticipación</span>
@@ -95,8 +96,25 @@
                          </div>
                      </div>
                     <div class="col-sm-6">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="basicaddon8">Sanción</span>
+                            <asp:TextBox runat="server" ID="txtSancion" CssClass="form-control" aria-label="Sanción" aria-describedby="basicaddon8"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
                         <asp:LinkButton runat="server" ID="btnCancelar" CssClass="btn btn-danger btn-sm" OnClick="btnCancelar_Click"><i class="fa-solid fa-delete-left"></i> Cancelar</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="btnGuardar" CssClass="btn btn-success btn-sm" OnClick="btnGuardar_Click"><i class="fa-solid fa-add"></i> Guardar</asp:LinkButton>
+                    </div>
+                    <div class="col-sm-6">
+                        <div runat="server" id="lst_errores" visible="false" class="text-danger">
+                            <fieldset style="all:revert;" class="text-danger">
+                                <legend style="all:revert;">Errores de validación de campos</legend>
+                                <div runat="server" id="errores"></div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
                 <br />                
