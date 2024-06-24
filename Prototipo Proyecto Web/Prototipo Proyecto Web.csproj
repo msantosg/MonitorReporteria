@@ -2202,11 +2202,13 @@
     <Content Include="Content\fontawesome-free-6.5.2-web\svgs\solid\yin-yang.svg" />
     <Content Include="Content\fontawesome-free-6.5.2-web\svgs\solid\z.svg" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="frm_AsignarReporte.aspx" />
     <Content Include="frm_MonitorReportes.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\alertas.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2295,6 +2297,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />

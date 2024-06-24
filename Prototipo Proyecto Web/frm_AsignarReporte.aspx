@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frm_AsignarReporte.aspx.cs" Inherits="Prototipo_Proyecto_Web.frm_AsignarReporte" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frm_AsignarReporte.aspx.cs" Inherits="Prototipo_Proyecto_Web.frm_AsignarReporte" EnableEventValidation="false"%>
 
 <!DOCTYPE html>
 
@@ -8,16 +8,40 @@
     <title>Asignaciones</title>
     <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="Content/fontawesome-free-6.5.2-web/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="Content/sweetalert.css" />
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>  
+    <script type="text/javascript" src="Scripts/sweetalert.min.js"></script>
+    <script type="text/javascript" src="Scripts/alertas.js"></script>
+      <script type="text/javascript">
+          function MostrarPregunta(strMensaje) {
+              swal({
+                  title: "¡Alerta!",
+                  text: strMensaje,
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Confirmar",
+                  cancelButtonText: "Cancelar",
+                  closeOnConfirm: false,
+                  closeOnCancel: true
+              },
+                  function (isConfirm) {
+                      if (isConfirm) {
+                          console.log('vamos a confirmar')
+                          __doPostBack("<%= btnOculto.UniqueID %>", "OnClick");
+                      }
+                  }
+              );
+          }
+      </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <br />
         <div class="container shadow p-3 mb-5 bg-white rounded">
-            <br />
+            <br />            
             <h2 class="text-center">Configuración de Reportes</h2>
-            <br />
-            <div id="dvAlerta" runat="server" visible="false">
-            </div>
             <br />
             <div class="row d-flex justify-content-end">
                 <div class="col-sm-3">
@@ -108,6 +132,7 @@
                     <div class="col-sm-6">
                         <asp:LinkButton runat="server" ID="btnCancelar" CssClass="btn btn-danger btn-sm" OnClick="btnCancelar_Click"><i class="fa-solid fa-delete-left"></i> Cancelar</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="btnGuardar" CssClass="btn btn-success btn-sm" OnClick="btnGuardar_Click"><i class="fa-solid fa-add"></i> Guardar</asp:LinkButton>
+                        <asp:Button runat="server" ID="btnOculto" CssClass="btnOculto" Visible="false" OnClick="btnOculto_Click"/>
                     </div>
                     <div class="col-sm-6">
                         <div runat="server" id="lst_errores" visible="false" class="text-danger">
@@ -175,11 +200,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
+        
     </form>
-    <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>  
+    
     <script type="text/javascript">
     $(document).ready(function () {
 

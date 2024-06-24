@@ -24,7 +24,7 @@ namespace Prototipo_Proyecto_Web
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-            {
+            {               
                 Cargar_ConfRpt();
             }
         }
@@ -59,6 +59,8 @@ namespace Prototipo_Proyecto_Web
         protected void btnNConfig_Click(object sender, EventArgs e)
         {
             dvNConfig.Visible = true;
+            lst_errores.Visible = false;
+            errores.InnerHtml = string.Empty;
             Session["InsOUpd"] = 1;
         }
 
@@ -96,8 +98,49 @@ namespace Prototipo_Proyecto_Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPreguntaDelete", "MostrarPregunta('¿Desea guardar la información ingresada?');", true);
+            }
+            catch(Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
+
+        protected void gvConfigMonitor_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if(e.CommandName == "Select")
+                {
+                    Session["InsOUpd"] = 2;
+                    dvNConfig.Visible = true;
+                    errores.InnerHtml = string.Empty;
+                    lst_errores.Visible = false;
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow row = gvConfigMonitor.Rows[index];
+                    txtIdConf.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ID_CONFIGURACION"].ToString();
+                    dropAreasR.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_RESPONSABLE"].ToString();
+                    dropAreasSol.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_SOLICITANTE"].ToString();
+                    txtDescReport.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["DESCRIPCION"].ToString();
+                    txtCorreo.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["CORREO"].ToString();
+                    dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
+                    dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
+                    txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
+                    txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
+
+        protected void btnOculto_Click(object sender, EventArgs e)
+        {
             List<string> lst_err = new List<string>();
-            dvAlerta.Visible = false;
             lst_errores.Visible = false;
             bool continua = true;
             clsCon = new clsConsultas();
@@ -153,7 +196,7 @@ namespace Prototipo_Proyecto_Web
                 #endregion
 
                 #region validaciones sanción
-                if(string.IsNullOrEmpty(txtSancion.Text))
+                if (string.IsNullOrEmpty(txtSancion.Text))
                 {
                     lst_err.Add("Campo Sanción es requerido.");
                     continua = false;
@@ -198,7 +241,7 @@ namespace Prototipo_Proyecto_Web
                 {
                     StringBuilder strErr = new StringBuilder();
                     strErr.Append("<ul>");
-                    foreach(string err in lst_err)
+                    foreach (string err in lst_err)
                     {
                         strErr.Append("<li>" + err + "</li>");
                     }
@@ -206,8 +249,7 @@ namespace Prototipo_Proyecto_Web
 
                     lst_errores.Visible = true;
                     errores.InnerHtml = strErr.ToString();
-                    dvAlerta.Visible = true;
-                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Errores de validación", "Existen errores en los campos que debe validar, por favor verifique la sección de errores.");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Existen errores en los campos que debe validar, por favor verifique la sección de errores.', ErrorMessage_Enum.Error);", true);
 
                     return;
                 }
@@ -225,57 +267,31 @@ namespace Prototipo_Proyecto_Web
                     sancion = txtSancion.Text,
                     estado = 0,
                     usuariomodifica = string.Empty,
-                    tipotransaccion = (Session["InsOUpd"].ToString().Equals("1") ? 1 : 2)
+                    tipotransaccion = Convert.ToInt32(Session["InsOUpd"].ToString())
                 });
 
                 int res = clsCon.InsUpConfRPT(json);
 
-                if(res == 0)
-                {
-                    dvAlerta.Visible = true;
-                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Satisfactorio, "Exitoso", "Registro guardado correctamente.");                    
-                }
+                if (res == 0)
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Registro guardado correctamente.', ErrorMessage_Enum.Success);", true);
                 else
-                {
-                    dvAlerta.Visible = true;
-                    dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Error", "Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.");
-                }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
 
+                txtDescReport.Text = string.Empty;
+                txtCorreo.Text = string.Empty;
+                txtAnticipacion.Text = string.Empty;
+                dropAreasR.SelectedIndex = 0;
+                dropAreasSol.SelectedIndex = 0;
+                dropPeriodo.SelectedIndex = 0;
+                dropUsuario.SelectedIndex = 0;
+                dvNConfig.Visible = false;
                 Cargar_ConfRpt();
                 dvNConfig.Visible = false;
-            }
-            catch(Exception ex)
-            {
-                dvAlerta.Visible = true;
-                dvAlerta.InnerHtml = clsUtils.HTML_Alert(clsUtils.TipoAlerta.Error, "Error General", "Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.");
-                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
-            }
-        }
 
-        protected void gvConfigMonitor_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if(e.CommandName == "Select")
-                {
-                    Session["InsOUpd"] = 2;
-                    dvNConfig.Visible = true;
-                    dvAlerta.Visible = false;
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    GridViewRow row = gvConfigMonitor.Rows[index];
-                    txtIdConf.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ID_CONFIGURACION"].ToString();
-                    dropAreasR.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_RESPONSABLE"].ToString();
-                    dropAreasSol.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_SOLICITANTE"].ToString();
-                    txtDescReport.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["DESCRIPCION"].ToString();
-                    txtCorreo.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["CORREO"].ToString();
-                    dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
-                    dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
-                    txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
-                    txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
-                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
             }
         }
