@@ -64,8 +64,6 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon2">Área Responsable</span>
                             <asp:DropDownList runat="server" ID="dropAreasR" CssClass="form-control" aria-label="Área Responsable" aria-describedby="bassicaddon2">
-                                <asp:ListItem Value="---">Seleccione Área</asp:ListItem>
-                                <asp:ListItem Value="1">Área Número 1</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -76,8 +74,6 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon3">Área Solicitante</span>
                             <asp:DropDownList runat="server" ID="dropAreasSol" CssClass="form-control" aria-label="Área Solicitante" aria-describedby="bassicaddon3">
-                                <asp:ListItem Value="---">Seleccione Área</asp:ListItem>
-                                <asp:ListItem Value="1">Área Número 1</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -94,8 +90,6 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon5">Usuario</span>
                             <asp:DropDownList runat="server" ID="dropUsuario" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="bassicaddon5">
-                                <asp:ListItem Value="---">Seleccione Usuario</asp:ListItem>
-                                <asp:ListItem Value="1">Usuario Número 1</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>

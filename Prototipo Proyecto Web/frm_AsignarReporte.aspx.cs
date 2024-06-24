@@ -26,6 +26,9 @@ namespace Prototipo_Proyecto_Web
             if(!IsPostBack)
             {               
                 Cargar_ConfRpt();
+                carga_usuarios();
+                carga_areasres();
+                carga_areassoli();
             }
         }
 
@@ -55,6 +58,89 @@ namespace Prototipo_Proyecto_Web
             }
         }
 
+        private void carga_usuarios()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                clsCon = new clsConsultas();
+
+                dt = clsCon.GetUsuarios();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dropUsuario.DataSource = dt;
+                    dropUsuario.DataTextField = "valor";
+                    dropUsuario.DataValueField = "llave";
+                    dropUsuario.DataBind();
+                }
+                else
+                {
+                    dropUsuario.DataSource = null;
+                    dropUsuario.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
+
+        private void carga_areasres()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                clsCon = new clsConsultas();
+
+                dt = clsCon.GetAreasRes();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dropAreasR.DataSource = dt;
+                    dropAreasR.DataTextField = "valor";
+                    dropAreasR.DataValueField = "llave";
+                    dropAreasR.DataBind();
+                }
+                else
+                {
+                    dropAreasR.DataSource = null;
+                    dropAreasR.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
+
+        private void carga_areassoli()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                clsCon = new clsConsultas();
+
+                dt = clsCon.GetAreasSoli();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dropAreasSol.DataSource = dt;
+                    dropAreasSol.DataTextField = "valor";
+                    dropAreasSol.DataValueField = "llave";
+                    dropAreasSol.DataBind();
+                }
+                else
+                {
+                    dropAreasSol.DataSource = null;
+                    dropAreasSol.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+        }
 
         protected void btnNConfig_Click(object sender, EventArgs e)
         {
@@ -133,7 +219,7 @@ namespace Prototipo_Proyecto_Web
             }
             catch(Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de mostrar el registro seleccionado, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
             }
         }

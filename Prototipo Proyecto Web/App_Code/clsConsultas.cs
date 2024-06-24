@@ -82,6 +82,108 @@ namespace Prototipo_Proyecto_Web.App_Code
             return dt;
         }
 
+        public DataTable GetUsuarios()
+        {
+            DataTable dt = new DataTable();
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Entro a consultar los datos de usuario", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_verusuarios";
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de usuario exitosamente", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de usuario con error", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            finally
+            {
+                clsCon.Desconectar();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetAreasRes()
+        {
+            DataTable dt = new DataTable();
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Entro a consultar los datos de areas responsables", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_verareas_res";
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de areas responsables exitosamente", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de areas responsables con error", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            finally
+            {
+                clsCon.Desconectar();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetAreasSoli()
+        {
+            DataTable dt = new DataTable();
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Entro a consultar los datos de areas solicitantes", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_verareas_soli";
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de areas solicitantes exitosamente", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("Finalizo consulta de datos de areas solicitantes con error", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            finally
+            {
+                clsCon.Desconectar();
+            }
+
+            return dt;
+        }
+
         public int InsUpConfRPT(string jsonRegistros)
         {
             int res = 0;
