@@ -9,10 +9,27 @@
     <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="Content/fontawesome-free-6.5.2-web/css/all.min.css"/>
     <link rel="stylesheet" type="text/css" href="Content/sweetalert.css" />
+    <link rel="stylesheet" type="text/css" href="Content/jquery-ui.min.css" />
+    <style>
+        .ui-datepicker .ui-datepicker-header
+        {
+            font-size: 12px;
+            background-color:darkblue;
+            color: white;
+        }
+
+        .ui-datepicker .ui-state-active
+        {
+            background-color:orangered;
+            color: white;
+        }
+    </style>
     <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>  
     <script type="text/javascript" src="Scripts/sweetalert.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui.min.js"></script>
     <script type="text/javascript" src="Scripts/alertas.js"></script>
+    <script type="text/javascript" src="Scripts/MascaraDate.js"></script>
       <script type="text/javascript">
           function MostrarPregunta(strMensaje) {
               swal({
@@ -57,7 +74,7 @@
                             
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon1">Descripción Reporte</span>
-                            <asp:TextBox runat="server" ID="txtDescReport" CssClass="form-control" style="text-transform:uppercase;" aria-label="Descripción Reporte" aria-describedby="basicaddon1"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtDescReport" CssClass="form-control" style="text-transform:uppercase;" aria-label="Descripción Reporte" aria-describedby="basicaddon1" autocomplete="off"></asp:TextBox>
                         </div>
                     </div>
                     <div class="col-sm-6"> 
@@ -80,7 +97,7 @@
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon5">Correo electrónico</span>
-                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control" aria-label="Correo Electrónico" aria-describedby="basicaddon4"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control" aria-label="Correo Electrónico" aria-describedby="basicaddon4" autocomplete="off"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -98,6 +115,7 @@
                             <span class="input-group-text" id="basicaddon6">Periodicidad</span>
                             <asp:DropDownList runat="server" ID="dropPeriodo" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="bassicaddon6">
                                 <asp:ListItem Value="---">Seleccione Periodicidad</asp:ListItem>
+                                <asp:ListItem Value="DIARIO">DIARIO</asp:ListItem>
                                 <asp:ListItem Value="MENSUAL">MENSUAL</asp:ListItem>
                                 <asp:ListItem Value="TRIMESTRAL">TRIMESTRAL</asp:ListItem>
                                 <asp:ListItem Value="SEMESTRAL">SEMESTRAL</asp:ListItem>
@@ -111,13 +129,22 @@
                      <div class="col-sm-6">
                          <div class="input-group input-group-sm">
                              <span class="input-group-text" id="basicaddon7">Anticipación</span>
-                             <asp:TextBox runat="server" ID="txtAnticipacion" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="basicaddon7"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="txtAnticipacion" CssClass="form-control" aria-label="Descripción Reporte" aria-describedby="basicaddon7" autocomplete="off"></asp:TextBox>
                          </div>
                      </div>
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon8">Sanción</span>
-                            <asp:TextBox runat="server" ID="txtSancion" CssClass="form-control" aria-label="Sanción" aria-describedby="basicaddon8"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtSancion" CssClass="form-control" aria-label="Sanción" aria-describedby="basicaddon8" autocomplete="off"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="basicaddon9">Fecha Publicación</span>
+                            <asp:TextBox runat="server" ID="txtFePublica"  CssClass="form-control DtPicker" onkeyup="formataData(this,event)" aria-label="Descripción Reporte" aria-describedby="basicaddon9" autocomplete="off"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -156,7 +183,7 @@
                             <div class="table-responsive">
                                 <asp:GridView runat="server" ID="gvConfigMonitor" AutoGenerateColumns="false" AllowPaging="True" ClientIDMode="Static"
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
-                                    DataKeyNames="ID_CONFIGURACION, USUARIO, AREA_RESPONSABLE, AREA_SOLICITANTE, CORREO, DESCRIPCION, PERIODICIDAD, ANTICIPACION, SANCION, ESTADO, FECHA_REGISTRO, USUARIO_MODIFICACION, FECHA_MODIFICACION"
+                                    DataKeyNames="ID_CONFIGURACION, USUARIO, AREA_RESPONSABLE, AREA_SOLICITANTE, CORREO, DESCRIPCION, PERIODICIDAD, ANTICIPACION, FECHA_PUBLICACION, SANCION, ESTADO, FECHA_REGISTRO, USUARIO_MODIFICACION, FECHA_MODIFICACION"
                                     GridLines="Horizontal" CssClass="table table-sm text-nowrap mt-5" Width="1020px"
                                     Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvConfigMonitor_RowDataBound" OnRowCommand="gvConfigMonitor_RowCommand">
                                     <Columns>
@@ -168,11 +195,12 @@
                                         <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="DESCRIPCION" />
                                         <asp:BoundField HeaderText="PERIODICIDAD" DataField="PERIODICIDAD" />
                                         <asp:BoundField HeaderText="ANTICIPACIÓN" DataField="ANTICIPACION" />
+                                        <asp:BoundField HeaderText="FECHA PUBLICACIÓN" DataField="FECHA_PUBLICACION" DataFormatString="{0:dd/MM/yyyy}"/>
                                         <asp:BoundField HeaderText="SANCIÓN" DataField="SANCION"/>
                                         <asp:BoundField HeaderText="ESTADO" DataField="ESTADO" />
-                                        <asp:BoundField HeaderText="FECHA REGISTRO" DataField="FECHA_REGISTRO" />
+                                        <asp:BoundField HeaderText="FECHA REGISTRO" DataField="FECHA_REGISTRO" DataFormatString="{0:dd/MM/yyyy}"/>
                                         <asp:BoundField HeaderText="USUARIO MODIFICA" DataField="USUARIO_MODIFICACION" />
-                                        <asp:BoundField HeaderText="FECHA MODIFICACIÓN" DataField="FECHA_MODIFICACION" />
+                                        <asp:BoundField HeaderText="FECHA MODIFICACIÓN" DataField="FECHA_MODIFICACION" DataFormatString="{0:dd/MM/yyyy}"/>
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton runat="server" ID="btnEditarCNF" CssClass="btn btn-sm btn-success" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"><i class="fa-solid fa-edit"></i> Editar Registro</asp:LinkButton>

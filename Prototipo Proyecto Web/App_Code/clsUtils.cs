@@ -88,5 +88,58 @@ namespace Prototipo_Proyecto_Web.App_Code
             }
             return stringBuilder.ToString();
         }
+
+        public static string DatePickerUI()
+        {
+            StringBuilder strJS = null;
+            try
+            {
+                strJS = new StringBuilder();
+                strJS.Append(@"<script type='text/javascript'>");
+                strJS.Append(@"function getjquerydate() {");
+                strJS.Append(@"$.datepicker.regional['es'] = {");
+                strJS.Append(@"closeText: 'Cerrar',");
+                strJS.Append(@"currentText: 'Hoy',");
+                strJS.Append(@"monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],");
+                strJS.Append(@"monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],");
+                strJS.Append(@"dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],");
+                strJS.Append(@"dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],");
+                strJS.Append(@"dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],");
+                strJS.Append(@"weekHeader: 'Sm',");
+                strJS.Append(@"firstDay: 1,");
+                strJS.Append(@"isRTL: false,");
+                strJS.Append(@"showMonthAfterYear: false,");
+                strJS.Append(@"yearSuffix: ''");
+                strJS.Append(@"};");
+                strJS.Append(@"$.datepicker.setDefaults($.datepicker.regional['es']);");
+                strJS.Append(@"$('.DtPicker').datepicker({");
+                strJS.Append(@"changeMonth: true,");
+                strJS.Append(@"changeYear: true,");
+                strJS.Append(@"dateFormat: 'dd/mm/yy'");
+                strJS.Append(@"});");
+                strJS.Append(@"}");
+                strJS.Append(@"getjquerydate();");
+                strJS.Append(@"</script>");
+            }
+            catch (Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, GetCurrentMethodName());
+                strJS = new StringBuilder();
+                strJS.Append(RetornaError(ex.Message));
+            }
+            return strJS.ToString();
+        }
+        public static string RetornaError(string str_Err)
+        {
+            try
+            {
+                return "<script type='text/javascript'>alert('Ocurrio un error en la carga del script - Revisar logs');</script>";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
     }
 }

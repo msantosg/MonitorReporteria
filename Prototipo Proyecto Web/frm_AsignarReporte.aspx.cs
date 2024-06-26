@@ -20,6 +20,7 @@ namespace Prototipo_Proyecto_Web
         private Regex regCorreo = new Regex(@"^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$");
         private Regex regAnticipa = new Regex("^[0-9]*$");
         private Regex regSancion = new Regex(@"^[0-9]+([.][0-9]{2})?$");
+        private Regex regFePublica = new Regex("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -148,6 +149,7 @@ namespace Prototipo_Proyecto_Web
             lst_errores.Visible = false;
             errores.InnerHtml = string.Empty;
             Session["InsOUpd"] = 1;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPicker2", clsUtils.DatePickerUI(), false);
         }
 
         protected void gvConfigMonitor_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -175,10 +177,10 @@ namespace Prototipo_Proyecto_Web
             txtDescReport.Text = string.Empty;
             txtCorreo.Text = string.Empty;
             txtAnticipacion.Text = string.Empty;
-            dropAreasR.SelectedIndex = 0;
-            dropAreasSol.SelectedIndex = 0;
-            dropPeriodo.SelectedIndex = 0;
-            dropUsuario.SelectedIndex = 0;
+            dropAreasR.SelectedValue = "-1";
+            dropAreasSol.SelectedValue = "-1";
+            dropPeriodo.SelectedValue = "---";
+            dropUsuario.SelectedValue = "...";
             dvNConfig.Visible = false;
         }
 
@@ -214,7 +216,9 @@ namespace Prototipo_Proyecto_Web
                     dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
                     dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
                     txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
+                    txtFePublica.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["FECHA_PUBLICACION"].ToString();
                     txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPicker2", clsUtils.DatePickerUI(), false);
                 }
             }
             catch(Exception ex)
@@ -276,6 +280,22 @@ namespace Prototipo_Proyecto_Web
                     if (!regAnticipa.IsMatch(txtAnticipacion.Text))
                     {
                         lst_err.Add("Campo Anticipación contiene caracteres inválidos.");
+                        continua = false;
+                    }
+                }
+                #endregion
+
+                #region validaciones fecha publicación
+                if (string.IsNullOrEmpty(txtFePublica.Text))
+                {
+                    lst_err.Add("Campo Fecha publicación es requerido.");
+                    continua = false;
+                }
+                else
+                {
+                    if (!regFePublica.IsMatch(txtFePublica.Text))
+                    {
+                        lst_err.Add("Campo Fecha publicación contiene caracteres inválidos.");
                         continua = false;
                     }
                 }
@@ -350,6 +370,7 @@ namespace Prototipo_Proyecto_Web
                     descripcion = txtDescReport.Text.ToUpper(),
                     periodicidad = dropPeriodo.SelectedValue,
                     anticipacion = txtAnticipacion.Text,
+                    diapub = DateTime.ParseExact(txtFePublica.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
                     sancion = txtSancion.Text,
                     estado = 0,
                     usuariomodifica = string.Empty,
@@ -366,6 +387,8 @@ namespace Prototipo_Proyecto_Web
                 txtDescReport.Text = string.Empty;
                 txtCorreo.Text = string.Empty;
                 txtAnticipacion.Text = string.Empty;
+                txtSancion.Text = string.Empty;
+                txtFePublica.Text = string.Empty;
                 dropAreasR.SelectedIndex = 0;
                 dropAreasSol.SelectedIndex = 0;
                 dropPeriodo.SelectedIndex = 0;
