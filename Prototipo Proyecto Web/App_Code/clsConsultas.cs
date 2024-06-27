@@ -229,5 +229,121 @@ namespace Prototipo_Proyecto_Web.App_Code
             }
             return res;
         }
+
+        public int InsEvidencia(int idejec, int idcnf, string b64img)
+        {
+            int res = 0;
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Insertando evidencia de cumplimiento de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_carga_evidencia";
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@idconf",
+                        SqlDbType = SqlDbType.Int,
+                        Value = idcnf,
+                        Direction = ParameterDirection.Input,
+                        Size = 8
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@idejec",
+                        SqlDbType = SqlDbType.Int,
+                        Direction = ParameterDirection.Input,
+                        Size = 8,
+                        Value = idejec
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@img",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Size = int.MaxValue,
+                        Value = b64img,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.ExecuteNonQuery();
+
+                    res = 0;
+                }
+
+                clsLog.EscribeLogInOut("Finalicé correctamente la insercíón de evidencia de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                res = -1;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("No se inserto la evidencia de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            return res;
+        }
+
+        public string VerEvidencia(int idejec, int idcnf)
+        {
+            string res = string.Empty;
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Verificando evidencia de cumplimiento de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_ver_evidencia";
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@idconf",
+                        SqlDbType = SqlDbType.Int,
+                        Value = idcnf,
+                        Direction = ParameterDirection.Input,
+                        Size = 8
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@idejec",
+                        SqlDbType = SqlDbType.Int,
+                        Direction = ParameterDirection.Input,
+                        Size = 8,
+                        Value = idejec
+                    });
+
+
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while(reader.Read())
+                        {
+                            res = reader.GetString(0);
+                        }
+                    }
+                    else
+                    {
+                        res = string.Empty;
+                    }
+
+                    
+                }
+
+                clsLog.EscribeLogInOut("Finalicé correctamente la verificación de evidencia de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                res = string.Empty;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("No se pudo verificar la evidencia de ejecución", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            return res;
+        }
     }
 }

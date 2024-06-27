@@ -172,7 +172,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group mb-3">
-                                <input id="InputBx" type="text" class="form-control form-control-sm" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                <input id="InputBx" type="text" class="form-control form-control-sm" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2" onkeyup="Search_Grid(this)"/>
                             </div>
                         </div>
                     </div>
@@ -228,16 +228,28 @@
     </form>
     
     <script type="text/javascript">
-    $(document).ready(function () {
+        function Search_Grid(strKey) {
+            var value = strKey.value.toLowerCase().split(" ");
 
-        $("#InputBx").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
+            var tblData = document.getElementById("<%= gvConfigMonitor.ClientID%>");
 
-            $("#gvConfigMonitor tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
+            var rowData;
+
+            for (var i = 1; i < tblData.rows.length; i++) {
+                rowData = tblData.rows[i].innerHTML;
+                var styleDisplay = 'none';
+
+                for (var j = 0; j < value.length; j++) {
+                    if (rowData.toLowerCase().indexOf(value[j]) >= 0)
+                        styleDisplay = '';
+                    else {
+                        styleDisplay = 'none';
+                        break;
+                    }
+                }
+                tblData.rows[i].style.display = styleDisplay;
+            }
+        }
     </script>
 </body>
 </html>

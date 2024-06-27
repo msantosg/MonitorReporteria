@@ -141,5 +141,37 @@ namespace Prototipo_Proyecto_Web.App_Code
             }
         }
 
+        public static bool validar_tama_img(byte[] imageBytes)
+        {
+            bool esValido = false;
+            try
+            {
+
+                int TamaImg = Convert.ToInt32(imageBytes.Length);
+                int TamaConfig = Convert.ToInt32(TraeKeyConfig("ConfAplicacion.tama_img"));
+
+                if (TamaImg > TamaConfig)
+                    esValido = false;
+                else
+                    esValido = true;
+            }
+            catch (Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, GetCurrentMethodName());
+                esValido = false;
+            }
+
+            return esValido;
+        }
+
+        public static string ConvertB64File(string fileName)
+        {
+            string path = TraeKeyConfig("ConfAplicacion.PathImg");
+            byte[] bytes = File.ReadAllBytes(path + fileName);
+            string file = Convert.ToBase64String(bytes);
+
+            return file;
+        }
+
     }
 }

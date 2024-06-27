@@ -177,6 +177,8 @@ namespace Prototipo_Proyecto_Web
             txtDescReport.Text = string.Empty;
             txtCorreo.Text = string.Empty;
             txtAnticipacion.Text = string.Empty;
+            txtSancion.Text = string.Empty;
+            txtFePublica.Text = string.Empty;
             dropAreasR.SelectedValue = "-1";
             dropAreasSol.SelectedValue = "-1";
             dropPeriodo.SelectedValue = "---";
@@ -383,19 +385,7 @@ namespace Prototipo_Proyecto_Web
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Registro guardado correctamente.', ErrorMessage_Enum.Success);", true);
                 else
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
-
-                txtDescReport.Text = string.Empty;
-                txtCorreo.Text = string.Empty;
-                txtAnticipacion.Text = string.Empty;
-                txtSancion.Text = string.Empty;
-                txtFePublica.Text = string.Empty;
-                dropAreasR.SelectedIndex = 0;
-                dropAreasSol.SelectedIndex = 0;
-                dropPeriodo.SelectedIndex = 0;
-                dropUsuario.SelectedIndex = 0;
-                dvNConfig.Visible = false;
-                Cargar_ConfRpt();
-                dvNConfig.Visible = false;
+                              
 
             }
             catch (Exception ex)
@@ -403,6 +393,18 @@ namespace Prototipo_Proyecto_Web
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de guardar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
             }
+
+            txtDescReport.Text = string.Empty;
+            txtCorreo.Text = string.Empty;
+            txtAnticipacion.Text = string.Empty;
+            txtSancion.Text = string.Empty;
+            txtFePublica.Text = string.Empty;
+            dropAreasR.SelectedValue = "-1";
+            dropAreasSol.SelectedValue = "-1";
+            dropPeriodo.SelectedValue = "---";
+            dropUsuario.SelectedValue = "...";
+            dvNConfig.Visible = false;
+            Cargar_ConfRpt();
         }
     }
 }

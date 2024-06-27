@@ -12,5 +12,9 @@
     "LogTrazas": "ProtoTipoLogInOut",
     "LogAlt": "ProtoTipoLogAlt",
     "LogPathAlt": "C:/TMP/ProtoTipoLog/Alt/"
+  },
+  "ConfAplicacion": {
+    "tama_img": "3500000",
+    "PathImg": "C:/TMP/IMG/"
   }
 }
