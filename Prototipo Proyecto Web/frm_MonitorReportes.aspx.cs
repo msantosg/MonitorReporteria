@@ -85,7 +85,13 @@ namespace Prototipo_Proyecto_Web
                         btnVer.Visible = true;
                     }    
                     else
+                    {
                         e.Row.Cells[6].ForeColor = System.Drawing.Color.Red;
+                        LinkButton btnCarga = e.Row.FindControl("btnCargaImg") as LinkButton;
+                        btnCarga.Visible = false;
+                        LinkButton btnVer = e.Row.FindControl("btnVerImg") as LinkButton;
+                        btnVer.Visible = false;
+                    }
                 }
             }
             catch (Exception ex) 

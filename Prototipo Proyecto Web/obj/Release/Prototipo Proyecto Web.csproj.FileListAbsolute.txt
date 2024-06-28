@@ -1,0 +1,75 @@
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Release\Prototipo Proyecto Web.csproj.AssemblyReference.cache
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Release\Prototipo Proyecto Web.csproj.CoreCompileInputs.cache
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Prototipo Proyecto Web.dll.config
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Prototipo Proyecto Web.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Prototipo Proyecto Web.pdb
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csc.exe
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csc.exe.config
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csc.rsp
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csi.exe
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csi.exe.config
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\csi.rsp
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.Managed.Core.targets
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.AppContext.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Collections.Immutable.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Console.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Globalization.Calendars.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.IO.Compression.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.IO.FileSystem.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Net.Http.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Net.Sockets.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Reflection.Metadata.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.ValueTuple.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Xml.XmlDocument.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Xml.XPath.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\vbc.exe
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\vbc.exe.config
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\vbc.rsp
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\VBCSCompiler.exe
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\roslyn\VBCSCompiler.exe.config
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Antlr3.Runtime.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\AspNet.ScriptManager.jQuery.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.ScriptManager.WebForms.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.Web.Infrastructure.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Newtonsoft.Json.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\System.Web.Optimization.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\WebGrease.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Newtonsoft.Json.xml
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\System.Web.Optimization.xml
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Antlr3.Runtime.pdb
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\es\System.Web.Optimization.resources.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Release\Prototip.EDFBD614.Up2Date
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Release\Prototipo Proyecto Web.dll
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Release\Prototipo Proyecto Web.pdb

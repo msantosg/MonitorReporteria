@@ -220,6 +220,6 @@ C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\es\System.Web.Opt
 C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
 C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototipo Proyecto Web.csproj.AssemblyReference.cache
 C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototipo Proyecto Web.csproj.CoreCompileInputs.cache
-C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototipo Proyecto Web.csproj.CopyComplete
 C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototipo Proyecto Web.dll
 C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototipo Proyecto Web.pdb
+C:\proyectos\.net\MonitorReporteria\Prototipo Proyecto Web\obj\Debug\Prototip.EDFBD614.Up2Date

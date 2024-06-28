@@ -25,7 +25,7 @@ namespace Prototipo_Proyecto_Web.App_Code
                 string LogFile = path + clsUtils.TraeKeyConfig("Log.LogErr") + DateTime.Now.ToString("yyyyMMdd") + ".log";
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-                var sw = new StreamWriter(LogFile, true)                
+                var sw = new StreamWriter(LogFile, true);                
                 sw.Write(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "|" + metodo + "|" + ex.Message + NewLine + ex.StackTrace + NewLine);
                 sw.Close();
             }
