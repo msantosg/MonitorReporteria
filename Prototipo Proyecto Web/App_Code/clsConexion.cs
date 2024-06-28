@@ -18,10 +18,13 @@ namespace Prototipo_Proyecto_Web.App_Code
             {
                 if (conn == null)
                     conn = new SqlConnection();
-                conn.ConnectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", 
+                if(conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.ConnectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}",
                     clsUtils.TraeKeyConfig("ConexionBD.Host"), clsUtils.TraeKeyConfig("ConexionBD.DataBase"),
                     clsUtils.TraeKeyConfig("ConexionBD.User"), clsUtils.TraeKeyConfig("ConexionBD.Pass"));
-                conn.Open();
+                    conn.Open();
+                }
 
                 res = true;
             }
