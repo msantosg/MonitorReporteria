@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.EnterpriseServices;
 using System.IO;
 using System.Linq;
@@ -171,6 +172,33 @@ namespace Prototipo_Proyecto_Web.App_Code
             string file = Convert.ToBase64String(bytes);
 
             return file;
+        }
+
+        public static string Base64ToImage(string b64)
+        {
+            string url = string.Empty;
+
+            try
+            {
+                byte[] imageBytes = Convert.FromBase64String(b64);
+                string path = TraeKeyConfig("ConfAplicacion.PathImg");
+                //using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+                //{
+                if (File.Exists(path + "imgEvidencia.jpeg"))
+                    File.Delete(path + "imgEvidencia.jpeg");
+                var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                Image image = Image.FromStream(ms, true);
+                image.Save(path + "imgEvidencia.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                url = path + "imgEvidencia.jpeg";
+                ms.Close();
+            }
+            catch(Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, GetCurrentMethodName());
+            }
+            //}
+
+            return url;
         }
 
     }

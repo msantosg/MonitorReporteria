@@ -219,6 +219,8 @@
                         <h5 class="modal-title" id="exampleModalLabel">Evidencia de Ejecución de Reporte</h5>
                     </div>
                     <div class="modal-body">
+                        <asp:TextBox runat="server" ID="txtIdEjecDown" Visible="false"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtIdConfDown" Visible="false"></asp:TextBox>
                         <div runat="server" id="dvImg">
                         </div>
                     </div>

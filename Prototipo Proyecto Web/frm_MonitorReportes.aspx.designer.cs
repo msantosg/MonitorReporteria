@@ -150,6 +150,24 @@ namespace Prototipo_Proyecto_Web
         protected global::System.Web.UI.WebControls.GridView gvEjecRpt;
 
         /// <summary>
+        /// Control txtIdEjecDown.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdEjecDown;
+
+        /// <summary>
+        /// Control txtIdConfDown.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdConfDown;
+
+        /// <summary>
         /// Control dvImg.
         /// </summary>
         /// <remarks>

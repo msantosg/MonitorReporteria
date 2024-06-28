@@ -133,6 +133,8 @@ namespace Prototipo_Proyecto_Web
                     string id = gvEjecRpt.DataKeys[r.RowIndex].Values["ID_CONFIGURACION"].ToString();
                     string idejec = gvEjecRpt.DataKeys[r.RowIndex].Values["ID_EJECUCION"].ToString();
                     string b64 = clsCon.VerEvidencia(Convert.ToInt32(idejec), Convert.ToInt32(id));
+                    txtIdConfDown.Text = id;
+                    txtIdEjecDown.Text = idejec;
                     dvImg.InnerHtml = "<img src=\"data:image/jpg;base64," + b64 + "\" class=\"img-fluid\"/>";
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "modal", "levantar_modal();", true);
@@ -236,7 +238,22 @@ namespace Prototipo_Proyecto_Web
 
         protected void btnDescargarImg_Click(object sender, EventArgs e)
         {
+            try
+            {
+                clsCon = new clsConsultas();
+                string b64 = clsCon.VerEvidencia(Convert.ToInt32(txtIdEjecDown.Text), Convert.ToInt32(txtIdConfDown.Text));
+                string urlimg = clsUtils.Base64ToImage(b64);
 
+                Response.ContentType = "image/jpeg";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=imgEvidencia.jpeg");
+                Response.WriteFile(urlimg);
+                Response.Flush();
+                Response.End();
+            }
+            catch(Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
         }
 
         protected void btnCerrarModal_Click(object sender, EventArgs e)
