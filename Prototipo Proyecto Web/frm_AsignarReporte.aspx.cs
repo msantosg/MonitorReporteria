@@ -158,12 +158,12 @@ namespace Prototipo_Proyecto_Web
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    if (e.Row.Cells[9].Text.Equals("PENDIENTE"))
-                        e.Row.Cells[9].ForeColor = System.Drawing.Color.Orange;
-                    else if (e.Row.Cells[9].Text.Equals("FINALIZADO"))
-                        e.Row.Cells[9].ForeColor = System.Drawing.Color.DarkGreen;
+                    if (e.Row.Cells[10].Text.Equals("PENDIENTE"))
+                        e.Row.Cells[10].ForeColor = System.Drawing.Color.Orange;
+                    else if (e.Row.Cells[10].Text.Equals("FINALIZADO"))
+                        e.Row.Cells[10].ForeColor = System.Drawing.Color.DarkGreen;
                     else
-                        e.Row.Cells[9].ForeColor = System.Drawing.Color.Red;
+                        e.Row.Cells[10].ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch(Exception ex)
