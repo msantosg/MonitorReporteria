@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using Newtonsoft.Json;
 
 namespace Prototipo_Proyecto_Web.App_Code
 {
@@ -186,11 +187,13 @@ namespace Prototipo_Proyecto_Web.App_Code
 
         public int InsUpConfRPT(string jsonRegistros)
         {
-            int res = 0;
+            int res = 0;          
+
             clsCon = new clsConexion();
             var guid = clsLog.EscribeLogInOut("Insertando o actualizando configuración de reportes", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
             try
             {
+                dynamic obj = JsonConvert.DeserializeObject<dynamic>(jsonRegistros);
                 if (clsCon.Conectar())
                 {
                     cmd = new SqlCommand();
@@ -199,10 +202,112 @@ namespace Prototipo_Proyecto_Web.App_Code
                     cmd.CommandText = "sp_insoact_configuracion";
                     cmd.Parameters.Add(new SqlParameter()
                     {
-                        ParameterName = "@JSONREGISTROS",
+                        ParameterName = "@USUARIO",
                         SqlDbType = SqlDbType.NVarChar,
-                        Value = jsonRegistros,
-                        Size = 32000,
+                        Value = obj.usuario.ToString(),
+                        Size = 50,
+                        Direction = ParameterDirection.Input
+                    });
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@AREA_RESPONSABLE",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.area_responsable.ToString(),
+                        Size = 100,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@AREA_SOLICITANTE",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.area_solicitante.ToString(),
+                        Size = 100,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@CORREO",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.correo.ToString(),
+                        Size = 50,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@DESCRIPCION",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.descripcion.ToString(),
+                        Size = 800,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@PERIODICIDAD",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.periodicidad.ToString(),
+                        Size = 25,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@ANTICIPACION",
+                        SqlDbType = SqlDbType.Int,
+                        Value = Convert.ToInt32(obj.anticipacion.ToString()),
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@DIAPUBLICACION",
+                        SqlDbType = SqlDbType.Date,
+                        Value = obj.diapub.ToString(),
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@SANCION",
+                        SqlDbType = SqlDbType.Decimal,
+                        Value = Convert.ToDecimal(obj.sancion.ToString()),
+                        Size = 18,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@ESTADO",
+                        SqlDbType = SqlDbType.Int,
+                        Value = Convert.ToInt32(obj.estado.ToString()),
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@USUARIOMODIFICA",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = obj.usuariomodifica.ToString(),
+                        Size = 50,
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@TIPOTRANS",
+                        SqlDbType = SqlDbType.Int,
+                        Value = Convert.ToInt32(obj.tipotransaccion.ToString()),
+                        Direction = ParameterDirection.Input
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@ID_CONFIGURACION",
+                        SqlDbType = SqlDbType.Int,
+                        Value = Convert.ToInt32(obj.id_conf.ToString()),
                         Direction = ParameterDirection.Input
                     });
 

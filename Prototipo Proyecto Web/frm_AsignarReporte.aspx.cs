@@ -218,7 +218,8 @@ namespace Prototipo_Proyecto_Web
                     dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
                     dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
                     txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
-                    txtFePublica.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["FECHA_PUBLICACION"].ToString();
+                    txtFePublica.Text = DateTime.ParseExact(gvConfigMonitor.DataKeys[row.RowIndex].Values["FECHA_PUBLICACION"].ToString(),
+                                        "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                     txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPicker2", clsUtils.DatePickerUI(), false);
                 }

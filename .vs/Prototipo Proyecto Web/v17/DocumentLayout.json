@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\proyectos\\.net\\MonitorReporteria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\frm_asignarreporte.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|c:\\proyectos\\.net\\monitorreporteria\\prototipo proyecto web\\frm_asignarreporte.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\frm_asignarreporte.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,7 +11,15 @@
       "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\frm_asignarreporte.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|c:\\proyectos\\.net\\monitorreporteria\\prototipo proyecto web\\frm_monitorreportes.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\app_code\\clsconsultas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\app_code\\clsconsultas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\frm_monitorreportes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\frm_monitorreportes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\frm_monitorreportes.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\frm_monitorreportes.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -21,14 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\app_code\\clsutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\app_code\\clsutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\frm_monitorreportes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\frm_monitorreportes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|C:\\proyectos\\.net\\MonitorReporteria\\prototipo proyecto web\\app_code\\clsconsultas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A34FC30F-FDCF-49BA-8FA9-12EBAE09D2B6}|Prototipo Proyecto Web\\Prototipo Proyecto Web.csproj|solutionrelative:prototipo proyecto web\\app_code\\clsconsultas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +42,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "clsLog.cs",
               "DocumentMoniker": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\App_Code\\clsLog.cs",
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\App_Code\\clsLog.cs",
@@ -54,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "clsUtils.cs",
               "DocumentMoniker": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\App_Code\\clsUtils.cs",
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\App_Code\\clsUtils.cs",
@@ -66,7 +66,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "frm_MonitorReportes.aspx.cs",
               "DocumentMoniker": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\frm_MonitorReportes.aspx.cs",
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\frm_MonitorReportes.aspx.cs",
@@ -74,20 +74,20 @@
               "RelativeToolTip": "Prototipo Proyecto Web\\frm_MonitorReportes.aspx.cs",
               "ViewState": "AQIAAEwAAAAAAAAAAAAuwFwAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-27T03:34:27.167Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-27T03:34:27.167Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "frm_MonitorReportes.aspx",
               "DocumentMoniker": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\frm_MonitorReportes.aspx",
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\frm_MonitorReportes.aspx",
               "ToolTip": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\frm_MonitorReportes.aspx",
               "RelativeToolTip": "Prototipo Proyecto Web\\frm_MonitorReportes.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000192|",
-              "WhenOpened": "2024-06-27T03:26:54.436Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-06-27T03:26:54.436Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -97,7 +97,7 @@
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\frm_AsignarReporte.aspx.cs",
               "ToolTip": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\frm_AsignarReporte.aspx.cs",
               "RelativeToolTip": "Prototipo Proyecto Web\\frm_AsignarReporte.aspx.cs",
-              "ViewState": "AQIAAJoAAAAAAAAAAAAswKEAAABQAAAA",
+              "ViewState": "AQIAAMwAAAAAAAAAAAAowN0AAACGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-27T03:42:05.145Z",
               "EditorCaption": ""
@@ -117,15 +117,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "clsConsultas.cs",
               "DocumentMoniker": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\App_Code\\clsConsultas.cs",
               "RelativeDocumentMoniker": "Prototipo Proyecto Web\\App_Code\\clsConsultas.cs",
               "ToolTip": "C:\\proyectos\\.net\\MonitorReporteria\\Prototipo Proyecto Web\\App_Code\\clsConsultas.cs",
               "RelativeToolTip": "Prototipo Proyecto Web\\App_Code\\clsConsultas.cs",
-              "ViewState": "AQIAADABAAAAAAAAAAAswFoBAAAIAAAA",
+              "ViewState": "AQIAADgBAAAAAAAAAAAYwEEBAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T01:35:38.217Z"
+              "WhenOpened": "2024-06-24T01:35:38.217Z",
+              "EditorCaption": ""
             }
           ]
         }
