@@ -7,9 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Monitor</title>
     <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="Content/fontawesome-free-6.5.2-web/css/all.min.css"/>
-<link rel="stylesheet" type="text/css" href="Content/sweetalert.css" />
-<link rel="stylesheet" type="text/css" href="Content/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.0/sweetalert.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/themes/base/jquery-ui.min.css" />
 <style>
     .ui-datepicker .ui-datepicker-header
     {
@@ -24,10 +25,12 @@
         color: white;
     }
 </style>
-<script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>  
-<script type="text/javascript" src="Scripts/sweetalert.min.js"></script>
-<script type="text/javascript" src="Scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>  
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.0/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
+<script type="text/javascript" src="Scripts/MascaraDate.js"></script>
 <script type="text/javascript" src="Scripts/alertas.js"></script>
 <script type="text/javascript">
     function levantar_modal() {
@@ -40,7 +43,6 @@
         $("#exampleModal").hide();
     }
 </script>
-<script type="text/javascript" src="Scripts/MascaraDate.js"></script>
   <script type="text/javascript">
       function MostrarPregunta(strMensaje) {
           swal({
@@ -213,7 +215,7 @@
             
         </div>
         <div class="modal modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Evidencia de Ejecución de Reporte</h5>
