@@ -41,7 +41,7 @@ namespace Prototipo_Proyecto_Web
                 clsCon = new clsConsultas();
 
                 dt = clsCon.GetConfigRPT();
-
+                Session["DtConf"] = dt;
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     gvConfigMonitor.DataSource = dt;
@@ -219,7 +219,7 @@ namespace Prototipo_Proyecto_Web
                     dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
                     txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
                     txtFePublica.Text = DateTime.ParseExact(gvConfigMonitor.DataKeys[row.RowIndex].Values["FECHA_PUBLICACION"].ToString(),
-                                        "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
+                                        clsUtils.TraeKeyConfig("ConfAplicacion.FormatoConversionFecha"), System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                     txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPicker2", clsUtils.DatePickerUI(), false);
                 }
@@ -373,7 +373,7 @@ namespace Prototipo_Proyecto_Web
                     descripcion = txtDescReport.Text.ToUpper(),
                     periodicidad = dropPeriodo.SelectedValue,
                     anticipacion = txtAnticipacion.Text,
-                    diapub = DateTime.ParseExact(txtFePublica.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
+                    diapub = DateTime.ParseExact(txtFePublica.Text, clsUtils.TraeKeyConfig("ConfAplicacion.FormatoConversionFecha"), System.Globalization.CultureInfo.InvariantCulture).ToString(clsUtils.TraeKeyConfig("ConfAplicacion.FormatoConversionFechaBD")),
                     sancion = txtSancion.Text,
                     estado = 0,
                     usuariomodifica = string.Empty,
@@ -406,6 +406,19 @@ namespace Prototipo_Proyecto_Web
             dropUsuario.SelectedValue = "...";
             dvNConfig.Visible = false;
             Cargar_ConfRpt();
+        }
+
+        protected void gvConfigMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                gvConfigMonitor.PageIndex = e.NewPageIndex;
+                gvConfigMonitor.DataSource = (DataTable)Session["DtConf"];
+                gvConfigMonitor.DataBind();
+            }catch(Exception ex)
+            {
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
         }
     }
 }

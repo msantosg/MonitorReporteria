@@ -186,7 +186,7 @@
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
                                     DataKeyNames="ID_CONFIGURACION, USUARIO, AREA_RESPONSABLE, AREA_SOLICITANTE, CORREO, DESCRIPCION, PERIODICIDAD, ANTICIPACION, FECHA_PUBLICACION, SANCION, ESTADO, FECHA_REGISTRO, USUARIO_MODIFICACION, FECHA_MODIFICACION"
                                     GridLines="Horizontal" CssClass="table table-sm text-nowrap mt-5" Width="1020px"
-                                    Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvConfigMonitor_RowDataBound" OnRowCommand="gvConfigMonitor_RowCommand">
+                                    Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvConfigMonitor_RowDataBound" OnRowCommand="gvConfigMonitor_RowCommand" OnPageIndexChanging="gvConfigMonitor_PageIndexChanging">
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="ID_CONFIGURACION" />
                                         <asp:BoundField HeaderText="USUARIO" DataField="USUARIO" />
