@@ -52,6 +52,27 @@
                   }
               );
           }
+
+          function MostrarPregunta2(strMensaje) {
+              swal({
+                  title: "¡Alerta!",
+                  text: strMensaje,
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Confirmar",
+                  cancelButtonText: "Cancelar",
+                  closeOnConfirm: false,
+                  closeOnCancel: true
+                },
+                function (isConfirm) {
+                      if (isConfirm) {
+                          console.log('vamos a confirmar')
+                          __doPostBack("<%= btnOculto2.UniqueID %>", "OnClick");
+                    }
+                }
+                );
+          }
       </script>
 </head>
 <body>
@@ -136,7 +157,8 @@
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" id="basicaddon8">Sanción</span>
-                            <asp:TextBox runat="server" ID="txtSancion" CssClass="form-control" aria-label="Sanción" aria-describedby="basicaddon8" autocomplete="off"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtSancion" CssClass="form-control" aria-label="Sanción" 
+                                aria-describedby="basicaddon8" autocomplete="off" placeholder="0.00"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -155,6 +177,7 @@
                         <asp:LinkButton runat="server" ID="btnCancelar" CssClass="btn btn-danger btn-sm" OnClick="btnCancelar_Click"><i class="fa-solid fa-delete-left"></i> Cancelar</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="btnGuardar" CssClass="btn btn-success btn-sm" OnClick="btnGuardar_Click"><i class="fa-solid fa-add"></i> Guardar</asp:LinkButton>
                         <asp:Button runat="server" ID="btnOculto" CssClass="btnOculto" Visible="false" OnClick="btnOculto_Click"/>
+                        <asp:Button runat="server" ID="btnOculto2" CssClass="btnOculto2" Visible="false" OnClick="btnOculto2_Click" />
                     </div>
                     <div class="col-sm-6">
                         <div runat="server" id="lst_errores" visible="false" class="text-danger">
@@ -206,6 +229,11 @@
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton runat="server" ID="btnEditarCNF" CssClass="btn btn-sm btn-success" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"><i class="fa-solid fa-edit"></i> Editar Registro</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="btnEliminarCNF" CssClass="btn btn-sm btn-danger" CommandName="Del" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"><i class="fa-solid fa-trash"></i> Eliminar Registro</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

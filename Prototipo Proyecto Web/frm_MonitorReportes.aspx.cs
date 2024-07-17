@@ -72,6 +72,7 @@ namespace Prototipo_Proyecto_Web
                     {
                         e.Row.Cells[6].ForeColor = System.Drawing.Color.Orange;
                         LinkButton btnCarga = e.Row.FindControl("btnCargaImg") as LinkButton;
+                        btnCarga.Text = "<i class=\"fa-solid fa-upload\"></i> Subir Imagen";
                         btnCarga.Visible = true;
                         LinkButton btnVer = e.Row.FindControl("btnVerImg") as LinkButton;
                         btnVer.Visible = false;
@@ -80,7 +81,8 @@ namespace Prototipo_Proyecto_Web
                     {
                         e.Row.Cells[6].ForeColor = System.Drawing.Color.DarkGreen;
                         LinkButton btnCarga = e.Row.FindControl("btnCargaImg") as LinkButton;
-                        btnCarga.Visible = false;
+                        btnCarga.Text = "<i class=\"fa-solid fa-upload\"></i> Cambiar Imagen";
+                        btnCarga.Visible = true;
                         LinkButton btnVer = e.Row.FindControl("btnVerImg") as LinkButton;
                         btnVer.Visible = true;
                     }    

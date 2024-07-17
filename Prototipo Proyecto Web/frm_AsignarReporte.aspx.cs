@@ -91,6 +91,7 @@ namespace Prototipo_Proyecto_Web
         {
             try
             {
+                dropAreasR.Items.Clear();
                 DataTable dt = new DataTable();
                 clsCon = new clsConsultas();
 
@@ -98,16 +99,11 @@ namespace Prototipo_Proyecto_Web
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    dropAreasR.DataSource = dt;
-                    dropAreasR.DataTextField = "valor";
-                    dropAreasR.DataValueField = "llave";
-                    dropAreasR.DataBind();
+                    foreach (DataRow row in dt.Rows)
+                        dropAreasR.Items.Add(new ListItem() { Value = row["llave"].ToString(), Text = row["valor"].ToString() });
                 }
                 else
-                {
-                    dropAreasR.DataSource = null;
-                    dropAreasR.DataBind();
-                }
+                    dropAreasR.Items.Clear();
             }
             catch (Exception ex)
             {
@@ -119,6 +115,7 @@ namespace Prototipo_Proyecto_Web
         {
             try
             {
+                dropAreasSol.Items.Clear();
                 DataTable dt = new DataTable();
                 clsCon = new clsConsultas();
 
@@ -126,16 +123,11 @@ namespace Prototipo_Proyecto_Web
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    dropAreasSol.DataSource = dt;
-                    dropAreasSol.DataTextField = "valor";
-                    dropAreasSol.DataValueField = "llave";
-                    dropAreasSol.DataBind();
+                    foreach(DataRow row in dt.Rows)
+                        dropAreasSol.Items.Add(new ListItem() { Value = row["llave"].ToString(), Text = row["valor"].ToString() });
                 }
                 else
-                {
-                    dropAreasSol.DataSource = null;
-                    dropAreasSol.DataBind();
-                }
+                    dropAreasSol.Items.Clear();
             }
             catch (Exception ex)
             {
@@ -211,17 +203,34 @@ namespace Prototipo_Proyecto_Web
                     int index = Convert.ToInt32(e.CommandArgument);
                     GridViewRow row = gvConfigMonitor.Rows[index];
                     txtIdConf.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ID_CONFIGURACION"].ToString();
-                    dropAreasR.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_RESPONSABLE"].ToString();
-                    dropAreasSol.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_SOLICITANTE"].ToString();
+                    dropAreasR.SelectedIndex = dropAreasR.Items.IndexOf(dropAreasR.Items.FindByText(gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_RESPONSABLE"].ToString()));
+                    dropAreasSol.SelectedIndex = dropAreasSol.Items.IndexOf(dropAreasSol.Items.FindByText(gvConfigMonitor.DataKeys[row.RowIndex].Values["AREA_SOLICITANTE"].ToString())) ;
                     txtDescReport.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["DESCRIPCION"].ToString();
                     txtCorreo.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["CORREO"].ToString();
-                    dropUsuario.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString();
+                    dropUsuario.SelectedIndex = dropUsuario.Items.IndexOf(dropUsuario.Items.FindByText(gvConfigMonitor.DataKeys[row.RowIndex].Values["USUARIO"].ToString()));
                     dropPeriodo.SelectedValue = gvConfigMonitor.DataKeys[row.RowIndex].Values["PERIODICIDAD"].ToString();
                     txtAnticipacion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["ANTICIPACION"].ToString();
                     txtFePublica.Text = DateTime.ParseExact(gvConfigMonitor.DataKeys[row.RowIndex].Values["FECHA_PUBLICACION"].ToString(),
                                         clsUtils.TraeKeyConfig("ConfAplicacion.FormatoConversionFecha"), System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                     txtSancion.Text = gvConfigMonitor.DataKeys[row.RowIndex].Values["SANCION"].ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPicker2", clsUtils.DatePickerUI(), false);
+                }
+                else if(e.CommandName == "Del")
+                {
+                    clsCon = new clsConsultas();
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow row = gvConfigMonitor.Rows[index];
+                    Session["idcnfDel"] = gvConfigMonitor.DataKeys[row.RowIndex].Values["ID_CONFIGURACION"].ToString();
+
+                    try
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "GeneraPreguntaDelete", "MostrarPregunta2('¿Desea eliminar el registro seleccionado?');", true);
+                    }
+                    catch (Exception ex)
+                    {
+                        clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                    }
+
                 }
             }
             catch(Exception ex)
@@ -419,6 +428,26 @@ namespace Prototipo_Proyecto_Web
             {
                 clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
             }
+        }
+
+        protected void btnOculto2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                clsCon = new clsConsultas();
+                int idcnf = Convert.ToInt32(Session["idcnfDel"].ToString());
+                int res = clsCon.EliminaConf(idcnf);
+                if (res == 0)
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Registro eliminado correctamente.', ErrorMessage_Enum.Success);", true);
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de eliminar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msgAlert", "MostrarMensaje('Ocurrió un error al momento de eliminar el registro, por favor comuniquese con sistemas.', ErrorMessage_Enum.Error);", true);
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+            }
+            Cargar_ConfRpt();
         }
     }
 }

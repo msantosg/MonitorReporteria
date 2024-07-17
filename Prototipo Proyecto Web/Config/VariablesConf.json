@@ -2,7 +2,7 @@
   "ConexionBD": {
     "User": "sa",
     "Pass": "Desarrollo$34",
-    "DataBase": "db_prototipo",
+    "DataBase": "db_reporteria",
     "Host": ".\\SQLEXPRESS"
   },
   "Log": {

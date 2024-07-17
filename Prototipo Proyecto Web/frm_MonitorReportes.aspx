@@ -175,8 +175,8 @@
                                      Style="border: 1px solid black; overflow: scroll; max-height: 200px;" OnRowDataBound="gvEjecRpt_RowDataBound" OnRowCommand="gvEjecRpt_RowCommand"
                                      DataKeyNames="ID_CONFIGURACION,ID_EJECUCION">
                                      <Columns>
-                                         <asp:BoundField HeaderText="ID CONFIGURACIÓN" DataField="ID_CONFIGURACION" />
-                                         <asp:BoundField HeaderText="ID EJECUCIÓN" DataField="ID_EJECUCION" />
+                                         <asp:BoundField HeaderText="ID CONFIGURACIÓN" DataField="ID_CONFIGURACION" Visible="false"/>
+                                         <asp:BoundField HeaderText="ID EJECUCIÓN" DataField="ID_EJECUCION" Visible="false"/>
                                          <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="DESCRIPCION" />
                                          <asp:BoundField HeaderText="FECHA COMPROMISO" DataField="FECHA_COMPROMISO" DataFormatString="{0:dd/MM/yyyy}"/>
                                          <asp:BoundField HeaderText="IMAGEN" DataField="IMAGEN" />

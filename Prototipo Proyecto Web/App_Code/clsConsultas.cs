@@ -450,5 +450,44 @@ namespace Prototipo_Proyecto_Web.App_Code
             }
             return res;
         }
+
+        public int EliminaConf(int idcnf)
+        {
+            int res = 0;
+            clsCon = new clsConexion();
+            var guid = clsLog.EscribeLogInOut("Eliminando configuración", clsUtils.GetCurrentMethodName(), clsLog.tInOut.IN);
+            try
+            {
+                if (clsCon.Conectar())
+                {
+                    cmd = new SqlCommand();
+                    cmd.Connection = clsCon.GetConnection();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_eliminaconf";
+                    cmd.Parameters.Add(new SqlParameter()
+                    {
+                        ParameterName = "@id_conf",
+                        SqlDbType = SqlDbType.Int,
+                        Value = idcnf,
+                        Direction = ParameterDirection.Input,
+                        Size = 8
+                    });
+
+                    cmd.ExecuteNonQuery();
+
+                    res = 0;
+                }
+
+                clsLog.EscribeLogInOut("Finalicé correctamente la eliminación de la configuración", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            catch (Exception ex)
+            {
+                res = -1;
+                clsLog.EscribeLogErr(ex, clsUtils.GetCurrentMethodName());
+                clsLog.EscribeLogInOut("No se eliminó la configuración", clsUtils.GetCurrentMethodName(), clsLog.tInOut.OUT, guid);
+            }
+            return res;
+        }
+    
     }
 }

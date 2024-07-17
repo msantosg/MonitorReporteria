@@ -179,6 +179,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="d-flex justify-content-end"><a href="frm_MonitorReportes.aspx" class="btn btn-success btn-sm">Ir a monitor reporte <i class="fa-solid fa-arrow-circle-right"></i></a></div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
