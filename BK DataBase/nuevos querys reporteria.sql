@@ -80,19 +80,27 @@ CREATE TABLE CNF_NOTIFICACION
 );
 GO
 
-create proc sp_carga_evidencia
+alter proc sp_carga_evidencia
 	@idconf int,
 	@idejec int,
 	@img nvarchar(max)
 as
+declare @PERIODO nvarchar(25)
+	
+	select @PERIODO = PERIODICIDAD from CNF_CONFIGURACION where ID_CONFIGURACION = @idconf;
+
 	update CNF_EJECUCION set IMAGEN = @img, FECHA_REGISTRO_IMAGEN = GETDATE(), ESTADO = 1
 	where ID_CONFIGURACION = @idconf and ID_EJECUCION = @idejec;
-
-	update CNF_CONFIGURACION set ESTADO = 0
+		
+	update CNF_CONFIGURACION set ESTADO = 0, DIAPUBLICACION = case upper(@PERIODO) when 'DIARIO' then dateadd(day, 1, DIAPUBLICACION)
+	when 'MENSUAL' then dateadd(day, 30, DIAPUBLICACION) when 'BIMENSUAL' then dateadd(day, 60, DIAPUBLICACION)
+	when 'TRIMESTRAL' then dateadd(day, 90, DIAPUBLICACION) when 'CUATRIMESTRAL' then dateadd(day, 120, DIAPUBLICACION)
+	when 'SEMESTRAL' then dateadd(day, 180, DIAPUBLICACION) when 'ANUAL' then dateadd(day, 360, DIAPUBLICACION) 
+	else dateadd(day, 0, DIAPUBLICACION) end, FECHA_MODIFICACION = getdate()
 	where ID_CONFIGURACION = @idconf;
 go
 
-create proc sp_cnf_ejecucion
+alter proc sp_cnf_ejecucion
 as
 declare @id_ejecucion int
 
@@ -101,13 +109,13 @@ select @id_ejecucion = ISNULL(MAX(ID_EJECUCION), 0) + 1 FROM CNF_EJECUCION;
 insert into CNF_EJECUCION (ID_EJECUCION, ID_CONFIGURACION, DESCRIPCION, FECHA_COMPROMISO, ESTADO, FECHA_REGISTRO)
 select @id_ejecucion, ID_CONFIGURACION, DESCRIPCION, DIAPUBLICACION, 0, GETDATE()
 from CNF_CONFIGURACION
-where estado = 0 and diapublicacion = cast(getdate() as date);
+where estado = 0 and day(diapublicacion) = day(cast(getdate() as date)) and month(diapublicacion) = month(cast(getdate() as date));
 
-update CNF_CONFIGURACION set ESTADO = 1, FECHA_MODIFICACION = GETDATE(), USUARIO_MODIFICACION = 'PROCESO AUTOMÁTICO'
-where estado = 0 and diapublicacion = cast(getdate() as date);
+update CNF_CONFIGURACION set ESTADO = 1, FECHA_MODIFICACION = GETDATE(), USUARIO_MODIFICACION = 'PROCESO AUTOMï¿½TICO'
+where estado = 0 and day(diapublicacion) = day(cast(getdate() as date)) and month(diapublicacion) = month(cast(getdate() as date));
 go
 
-create proc sp_insoact_configuracion
+alter proc sp_insoact_configuracion
 	@USUARIO nvarchar(50),
 	@AREA_RESPONSABLE NVARCHAR(100),
 	@AREA_SOLICITANTE NVARCHAR(100),
@@ -146,7 +154,7 @@ declare @id_config int
 	end;
 go
 
-create proc sp_trae_notificaciones
+ALTER proc sp_trae_notificaciones
 as
 declare
 	@ID_CONF INT,
@@ -166,7 +174,7 @@ DECLARE @ASUNTO VARCHAR(MAX)	= 'Notificacion'
 DECLARE @TITULO VARCHAR(MAX)	= 'Reportes Pendientes'
 DECLARE @PROFILE VARCHAR(MAX)	= 'Administracion Solidum'
 DECLARE @RECEPTORES VARCHAR(MAX) = 'edcanel@hotmail.com;mariosantos1001@hotmail.com;erick.chajon@icp-gt.com'
-DECLARE @CONTENIDO VARCHAR(MAX) = 'Prueba de concepto'
+DECLARE @CONTENIDO VARCHAR(MAX) = ''
 
 
 OPEN C_NOTIFICA
@@ -177,26 +185,26 @@ BEGIN
 	
 	if(@USUARIOAUX = @USUARIO)
 	begin
-		SELECT @RESUMEN_RPT = @RESUMEN_RPT + ', ' + @DESCRIPCION
+		SELECT @RESUMEN_RPT = @RESUMEN_RPT + ' <li> ' + @DESCRIPCION + '</li>'
 		print @RESUMEN_RPT;
 	end
 	else
 	begin
-		select @CONTENIDO = 'Estimado Usuario. Atentamente nos dirigimos a usted para notificarle del vencimiento del reporte asignado ' + @RESUMEN_RPT + '. Atentamente, Sistema de Notificación Automática.';
+		select @CONTENIDO = 'Estimado Usuario. <br></br> Atentamente nos dirigimos a usted para notificarle del vencimiento en los siguientes reportes asignados <br></br> <ul>' + @RESUMEN_RPT + '</ul>';
 		print(@CONTENIDO);
-		print(@RECEPTORES);
+		print(@CORREO);
 		print(@TITULO);
 		print(@PROFILE);
 		print(@ASUNTO);
 		print(@RESUMEN_RPT);
-		/*EXEC vhur.dbo.SEND_MAIL_GENERIC
+		EXEC vhur.dbo.SEND_MAIL_GENERIC
 				  @ASUNTO,
 				  @TITULO,
 				  @CONTENIDO,
-				  @RECEPTORES,
+				  @CORREO,
 				  '',
 				  11,
-				  @PROFILE*/
+				  @PROFILE
 	end
 
 	select @count = count(*) from CNF_NOTIFICACION where ID_CONFIGURACION = @ID_CONF and ID_EJECUCION = @ID_EJEC;
@@ -209,10 +217,28 @@ BEGIN
 	FETCH NEXT FROM C_NOTIFICA INTO @ID_CONF, @ID_EJEC, @CORREO, @DESCRIPCION, @USUARIO
 END
 CLOSE C_NOTIFICA
+if (@RESUMEN_RPT <> '')
+begin
+select @CONTENIDO = 'Estimado Usuario. <br></br> Atentamente nos dirigimos a usted para notificarle del vencimiento en los siguientes reportes asignados <br></br> <ul>' + @RESUMEN_RPT + '</ul>';
+print(@CONTENIDO);
+		print(@CORREO);
+		print(@TITULO);
+		print(@PROFILE);
+		print(@ASUNTO);
+		print(@RESUMEN_RPT);
+		EXEC vhur.dbo.SEND_MAIL_GENERIC
+				  @ASUNTO,
+				  @TITULO,
+				  @CONTENIDO,
+				  @CORREO,
+				  '',
+				  11,
+				  @PROFILE
+end
 DEALLOCATE C_NOTIFICA
 go
 
-create proc sp_ver_evidencia
+alter proc sp_ver_evidencia
 	@idconf int,
 	@idejec int
 as
@@ -221,7 +247,7 @@ as
 	where ID_CONFIGURACION = @idconf and ID_EJECUCION = @idejec;
 go
 
-create proc sp_ver_reportes_vencidos
+alter proc sp_ver_reportes_vencidos
 as
 update CNF_EJECUCION set estado = 2
 where estado = 0 and DATEDIFF(day, FECHA_REGISTRO, cast(getdate() as date)) > 0;
@@ -231,21 +257,21 @@ where estado = 1
 and ID_CONFIGURACION in (select ID_CONFIGURACION from CNF_EJECUCION where estado in (2))
 go
 
-create proc sp_verareas_res
+alter proc sp_verareas_res
 as
 select -1 as llave, 'Seleccione Area' as valor
 union all
 select id_area as llave, dsarea as valor from AREA_RESPONSABLE;
 go
 
-create proc sp_verareas_soli
+alter proc sp_verareas_soli
 as
 select -1 as llave, 'Seleccione Area' as valor
 union all
 select id_area as llave, dsarea as valor from AREA_SOLICITANTE
 go
 
-create proc sp_verconfiguracionrpt
+alter proc sp_verconfiguracionrpt
 as
 select ID_CONFIGURACION, us.USUARIO AS USUARIO, ar.DSAREA AS AREA_RESPONSABLE, aso.DSAREA AS AREA_SOLICITANTE, CORREO, DESCRIPCION, PERIODICIDAD, ANTICIPACION,
 convert(nvarchar(30), DIAPUBLICACION,103) AS FECHA_PUBLICACION, SANCION, CASE ESTADO WHEN 0 THEN 'PENDIENTE' WHEN 1 THEN 'FINALIZADO' WHEN 2 THEN 'VENCIDO' ELSE ''END as ESTADO, 
@@ -257,21 +283,21 @@ inner join USUARIO us on us.ID_USUARIO = cc.USUARIO
 where estado <> 3;
 go
 
-create proc sp_vermonitor
+alter proc sp_vermonitor
 as
 select ID_CONFIGURACION, ID_EJECUCION, DESCRIPCION, convert(nvarchar(30), FECHA_COMPROMISO, 103) as FECHA_COMPROMISO, CASE ESTADO WHEN 0 THEN 'PENDIENTE DE CARGA' ELSE 'EVIDENCIA CARGADA' END AS IMAGEN, FECHA_REGISTRO_IMAGEN as FECHA_REG_IMG,  
 CASE ESTADO WHEN 0 THEN 'PENDIENTE' WHEN 1 THEN 'FINALIZADO' ELSE 'VENCIDO' END as ESTADO, convert(nvarchar(30), FECHA_REGISTRO, 103) as FECHA_REGISTRO
 from CNF_EJECUCION;
 go
 
-create PROC sp_verusuarios
+alter PROC sp_verusuarios
 as
 select '...' as llave, 'Seleccione Usuario' as valor
 union all
 select ID_USUARIO as llave, usuario as valor from USUARIO;
 go
 
-create proc sp_eliminaconf
+alter proc sp_eliminaconf
 @id_conf int
 as
 	update CNF_CONFIGURACION set ESTADO = 3 where ID_CONFIGURACION = @id_conf;
@@ -284,11 +310,11 @@ INSERT INTO USUARIO VALUES ('ECHAJON', 'ERICK CHAJON');
 INSERT INTO AREA_RESPONSABLE VALUES (1, 'OFICINA DE CUMPLIMIENTO');
 INSERT INTO AREA_RESPONSABLE VALUES (2, 'SECRETARIA DE GERENCIA GENERAL');
 INSERT INTO AREA_RESPONSABLE VALUES (3, 'UNIDAD DE RIESGOS');
-INSERT INTO AREA_RESPONSABLE VALUES (4, 'DIRECCIÓN ADMINISTRATIVA');
-INSERT INTO AREA_RESPONSABLE VALUES (5, 'DIRECCIÓN FINANCIERA');
-INSERT INTO AREA_RESPONSABLE VALUES (6, 'DIRECCIÓN DE SISTEMAS');
+INSERT INTO AREA_RESPONSABLE VALUES (4, 'DIRECCIï¿½N ADMINISTRATIVA');
+INSERT INTO AREA_RESPONSABLE VALUES (5, 'DIRECCIï¿½N FINANCIERA');
+INSERT INTO AREA_RESPONSABLE VALUES (6, 'DIRECCIï¿½N DE SISTEMAS');
 
 INSERT INTO AREA_SOLICITANTE VALUES (1, 'SUPERINTENDENCIA DE BANCOS');
 INSERT INTO AREA_SOLICITANTE VALUES (2, 'ORGANISMO JUDICIAL');
-INSERT INTO AREA_SOLICITANTE VALUES (3, 'MINISTERIO PÚBLICO');
-INSERT INTO AREA_SOLICITANTE VALUES (4, 'INSTITUTO DE VERIFICACIÓN ESPECIAL');
+INSERT INTO AREA_SOLICITANTE VALUES (3, 'MINISTERIO Pï¿½BLICO');
+INSERT INTO AREA_SOLICITANTE VALUES (4, 'INSTITUTO DE VERIFICACIï¿½N ESPECIAL');
